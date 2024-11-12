@@ -1,0 +1,39 @@
+<%- include ("../views/partials/header.ejs"); %>
+<%- include ("../views/partials/homeNavBar.ejs"); %>
+
+<body>
+
+    <div class="container">
+        <br>
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome!</h1>
+            <p class="lead">This is a simple application in a blog format.</p>
+            <hr class="my-4">
+            <p>Here, you can create categories and articles.</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Read More</a>
+          </div>
+          <br>
+
+        <% articles.forEach(article => { %>
+            <div class="card">
+                <div class="card-header">
+                    <h2><%= article.title %></h2>
+                </div>
+                <div class="card-body">
+                  <a href="/<%= article.slug %>" class="btn btn-success">Read Article</a>
+                </div>
+            </div>
+            <br>
+        <% }) %>
+
+        <div class="row">
+            <div class="col col-12">
+                <a href="/articles/page/2" style="float: right;">Next >></a>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+</body>
+
+<%- include ("../views/partials/footer.ejs"); %>

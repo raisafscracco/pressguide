@@ -1,0 +1,55 @@
+<%- include ("../../../views/partials/header.ejs"); %> <%- include
+("../../../views/partials/navbar.ejs"); %>
+
+<div class="container">
+  <hr />
+  <div class="card">
+    <div class="card-header">
+      <h2>Edit Article</h2>
+    </div>
+    <div class="card-body">
+      <form method="POST" action="/articles/update">
+        <input type="hidden" value="<%= article.id %>" name="id">
+        <input
+          class="form-control"
+          type="text"
+          name="title"
+          placeholder="Define the article's title."
+          value="<%- article.title %>" /><br />
+        <textarea class="form-control" placeholder="Write the article here." name="body" id="article"></textarea><br>
+        <label>Category</label>
+        <select name="category" class="form-control">
+            <% categories.forEach((category) => { %>
+                <% if(category.id == article.categoryId) { %>
+                  <option value="<%= category.id %>" selected><%= category.title %></option>
+                <% }else { %>
+                  <option value="<%= category.id %>"><%= category.title %></option>
+                <% } %>
+                
+            <% }) %>
+        </select><br>
+        <button class="btn btn-success">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="content" style="display: none;">
+  <%- article.body %>
+</div>
+
+
+<%- include ("../../../views/partials/footer.ejs"); %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+
+tinymce.init({
+  selector: "#article",
+  license_key: 'gpl',
+  init_instance_callback: () => {
+    tinymce.get("article").setContent($("#content").html());
+  }
+});
+
+</script>
